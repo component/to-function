@@ -1,0 +1,12 @@
+{
+  "name": "to-function",
+  "repo": "component/to-function",
+  "description": "Convert property access strings into functions",
+  "version": "0.0.1",
+  "keywords": ["utility"],
+  "dependencies": {},
+  "development": {},
+  "scripts": [
+    "index.js"
+  ]
+}
