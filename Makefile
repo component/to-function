@@ -8,4 +8,9 @@ components:
 clean:
 	rm -fr build components template.js
 
-.PHONY: clean
+test:
+	@./node_modules/.bin/mocha \
+		--require should	\
+		--reporter spec
+
+.PHONY: clean test
