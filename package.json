@@ -5,7 +5,10 @@
   "version": "0.0.1",
   "keywords": ["utility"],
   "dependencies": {},
-  "development": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
   "component": {
     "scripts": {
       "to-function/index.js": "index.js"
