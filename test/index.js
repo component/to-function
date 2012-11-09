@@ -17,6 +17,13 @@ describe('toFunction(str)', function(){
     var fn = toFunction('name.first');
     assert(null == fn({}));
   })
+
+  it('should invoke getter-style functions', function(){
+    var user = { attrs: { name: 'tj' }};
+    user.name = function(){ return this.attrs.name };
+    var fn = toFunction('name');
+    assert('tj' == fn(user));
+  })
 })
 
 describe('toFunction(fn)', function(){

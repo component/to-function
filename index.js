@@ -8,6 +8,8 @@ module.exports = toFunction;
 /**
  * Convert `obj` to a `Function`.
  *
+ * TODO: consider compiling to functions.
+ *
  * @param {Mixed} obj
  * @return {Function}
  * @api private
@@ -37,7 +39,12 @@ function stringToFunction(str) {
   return function(obj){
     for (var i = 0; i < props.length; ++i) {
       if (null == obj) return;
-      obj = obj[props[i]];
+      var name = props[i];
+      if ('function' == typeof obj[name]) {
+        obj = obj[name]();
+      } else {
+        obj = obj[name];
+      }
     }
     return obj;
   }
