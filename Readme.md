@@ -1,4 +1,3 @@
-
 # to-function
 
   Convert property access strings into functions
@@ -17,6 +16,6 @@ fn(user);
 // => "Tobi"
 ```
 
-# License
+## License
 
   MIT
