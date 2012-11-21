@@ -1,4 +1,11 @@
 
+1.1.0 / 2012-11-20 
+==================
+
+  * add js expression support
+  * add strict equality default
+  * add regexp support
+
 1.0.0 / 2012-11-08 
 ==================
 
