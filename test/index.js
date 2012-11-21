@@ -25,6 +25,12 @@ describe('toFunction(str)', function(){
     assert(true === fn({ age: 20 }));
     assert(false === fn({ age: 18 }));
   })
+
+  it('should support js with immediate value', function(){
+    var fn = toFunction('> 18');
+    assert(true === fn(20));
+    assert(false === fn(18));
+  })
 })
 
 describe('toFunction(fn)', function(){

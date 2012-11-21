@@ -63,5 +63,9 @@ function regexpToFunction(re) {
  */
 
 function stringToFunction(str) {
+  // immediate such as "> 20"
+  if (/^ *\W+/.test(str)) return new Function('_', 'return _ ' + str);
+
+  // properties such as "name.first" or "age > 18"
   return new Function('_', 'return _.' + str);
 }
