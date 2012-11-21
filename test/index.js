@@ -13,16 +13,17 @@ describe('toFunction(str)', function(){
     fn({ name: { first: 'Tobi' } }).should.equal('Tobi');
   })
 
-  it('should ignore undefined properties', function(){
-    var fn = toFunction('name.first');
-    assert(null == fn({}));
-  })
-
   it('should invoke getter-style functions', function(){
     var user = { attrs: { name: 'tj' }};
     user.name = function(){ return this.attrs.name };
-    var fn = toFunction('name');
+    var fn = toFunction('name()');
     assert('tj' == fn(user));
+  })
+
+  it('should support js expressions', function(){
+    var fn = toFunction('age > 18');
+    assert(true === fn({ age: 20 }));
+    assert(false === fn({ age: 18 }));
   })
 })
 

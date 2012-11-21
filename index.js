@@ -63,17 +63,5 @@ function regexpToFunction(re) {
  */
 
 function stringToFunction(str) {
-  var props = str.split('.');
-  return function(obj){
-    for (var i = 0; i < props.length; ++i) {
-      if (null == obj) return;
-      var name = props[i];
-      if ('function' == typeof obj[name]) {
-        obj = obj[name]();
-      } else {
-        obj = obj[name];
-      }
-    }
-    return obj;
-  }
+  return new Function('_', 'return _.' + str);
 }
