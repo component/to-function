@@ -8,8 +8,6 @@ module.exports = toFunction;
 /**
  * Convert `obj` to a `Function`.
  *
- * TODO: consider compiling to functions.
- *
  * @param {Mixed} obj
  * @return {Function}
  * @api private
