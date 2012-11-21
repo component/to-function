@@ -41,3 +41,12 @@ describe('toFunction(regexp)', function(){
     assert(true === fn('tobi'));
   })
 })
+
+describe('toFunction(other)', function(){
+  it('should default to === equality', function(){
+    var fn = toFunction(null);
+    assert(true == fn(null));
+    assert(false == fn(0));
+    assert(false == fn());
+  })
+})

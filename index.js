@@ -24,7 +24,21 @@ function toFunction(obj) {
     case '[object RegExp]':
       return regexpToFunction(obj);
     default:
-      throw new TypeError('invalid callback "' + obj + '"');
+      return defaultToFunction(obj);
+  }
+}
+
+/**
+ * Default to strict equality.
+ *
+ * @param {Mixed} val
+ * @return {Function}
+ * @api private
+ */
+
+function defaultToFunction(val) {
+  return function(obj){
+    return val === obj;
   }
 }
 
