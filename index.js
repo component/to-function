@@ -16,13 +16,29 @@ module.exports = toFunction;
  */
 
 function toFunction(obj) {
-  switch (typeof obj) {
-    case 'function':
+  switch ({}.toString.call(obj)) {
+    case '[object Function]':
       return obj;
-    case 'string':
+    case '[object String]':
       return stringToFunction(obj);
+    case '[object RegExp]':
+      return regexpToFunction(obj);
     default:
       throw new TypeError('invalid callback "' + obj + '"');
+  }
+}
+
+/**
+ * Convert `re` to a function.
+ *
+ * @param {RegExp} re
+ * @return {Function}
+ * @api private
+ */
+
+function regexpToFunction(re) {
+  return function(obj){
+    return re.test(obj);
   }
 }
 

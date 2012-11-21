@@ -32,3 +32,12 @@ describe('toFunction(fn)', function(){
     assert(fn == toFunction(fn));
   })
 })
+
+describe('toFunction(regexp)', function(){
+  it('should .test the value', function(){
+    var fn = toFunction(/^tob/);
+    assert(false === fn({}));
+    assert(false === fn('luna'));
+    assert(true === fn('tobi'));
+  })
+})
