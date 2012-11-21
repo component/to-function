@@ -16,6 +16,13 @@ fn(user);
 // => "Tobi"
 ```
 
+## Converts
+
+  - strings to expressions, for ex `foo.bar()` becomes `return _.foo.bar()`
+  - regexps to `re.test(val)` calls
+  - functions to themselves
+  - defaults to `===` equality
+
 ## License
 
   MIT
