@@ -17,11 +17,15 @@ fn(user);
 
 // Matching object properties:
 var fn = toFunction({
-  name: 'Tobi'
+  name: 'Tobi',
+  age: function(age) {
+    return age > 2
+  }
 });
 
 // Note: matcher ignores additional object properties
-var luna = { name: 'Luna', age: 2 };
+var luna = { name: 'Luna', age: 3 };
+var tobi = { name: 'Tobi', age: 2 };
 var tobi = { name: 'Tobi', age: 3 };
 
 fn(luna); // => false

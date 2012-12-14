@@ -88,6 +88,7 @@ function objectToFunction(obj) {
       switch ({}.toString.call(obj[key])) {
         case '[object Object]':
         case '[object RegExp]':
+        case '[object Function]':
           if (!toFunction(obj[key])(val[key])) return false;
         break;
         default:
