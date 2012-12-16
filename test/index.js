@@ -1,6 +1,6 @@
 
 var toFunction = require('..')
-  , assert = require('assert');
+  , assert = require('better-assert');
 
 describe('toFunction(str)', function(){
   it('should access properties', function(){
@@ -50,11 +50,12 @@ describe('toFunction(regexp)', function(){
 })
 
 describe('toFunction(object)', function(){
-  it('should match object values', function(){
+  it('should support ==', function(){
     var fn = toFunction({
       name: 'tobi',
       age: /\d+/
     });
+
     assert(false === fn({}));
     assert(false === fn({ name: 'luna' }));
     assert(false === fn('tobi'));
@@ -62,57 +63,56 @@ describe('toFunction(object)', function(){
     assert(false === fn({ name: 'tobi' }));
     assert(true === fn({ name: 'tobi', age: 3, type: 'ferret' }));
   })
-  
-  it('should match regexps in sub-objects', function(){
+
+  it('should support nesting', function(){
+    var user = {
+      name: {
+        first: 'Tobi',
+        last: 'Ferret'
+      }
+    };
+
     var fn = toFunction({
-      name: /Mr\./,
-      age: function(age) {
-        return age > 2
-      },
-      address: {
-        street: /\d+ Mayne Street/,
-        town: 'Rhode Island'
+      name: {
+        first: 'Tobi',
+        last: 'Ferret'
       }
     });
 
-    // Doesn't match inner regex
-    assert(false === fn({
-      name: 'Mrs. Tobi',
-      age: 3,
-      address: {
-        street: 'Somewhere on Mayne Street',
-        town: 'Rhode Island'
-      }
-    }));
+    assert(true == fn(user));
 
-    // Missing address.street
-    assert(false === fn({
-      name: 'Mr. Tobi',
-      age: 3,
-      address: {
-        town: 'Rhode Island'
+    var fn = toFunction({
+      name: {
+        first: 'Loki',
+        last: 'Ferret'
       }
-    }));
+    });
 
-    // age < 2
-    assert(false === fn({
-      name: 'Mr. Tobi',
-      age: 2,
-      address: {
-        street: '12 Mayne Street',
-        town: 'Rhode Island'
-      }
-    }));
+    assert(false == fn(user));
+  })
 
-    assert(true === fn({
-      name: 'Mr. Tobi',
-      age: 3,
-      address: {
-        street: '12 Mayne Street',
-        town: 'Rhode Island'
+  it('should support regexps', function(){
+    var user = {
+      name: {
+        first: 'Tobi',
+        last: 'Ferret'
       }
-    }));
-  });
+    };
+
+    var fn = toFunction({
+      name: { last: /^Fer/ }
+    });
+
+    assert(true == fn(user));
+
+    var fn = toFunction({
+      name: {
+        last: /^ferret$/
+      }
+    });
+
+    assert(false == fn(user));
+  })
 });
 
 describe('toFunction(other)', function(){
