@@ -56,11 +56,11 @@ describe('toFunction(object)', function(){
       age: /\d+/
     });
     assert(false === fn({}));
-    assert(false === fn({name: 'luna'}));
+    assert(false === fn({ name: 'luna' }));
     assert(false === fn('tobi'));
-    assert(false === fn({name: 'luna', age: 2}));
-    assert(false === fn({name: 'tobi'}));
-    assert(true === fn({name: 'tobi', age: 3, type: 'ferret'}));
+    assert(false === fn({ name: 'luna', age: 2 }));
+    assert(false === fn({ name: 'tobi' }));
+    assert(true === fn({ name: 'tobi', age: 3, type: 'ferret' }));
   })
   
   it('should match regexps in sub-objects', function(){
