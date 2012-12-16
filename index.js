@@ -15,6 +15,8 @@ module.exports = toFunction;
 
 function toFunction(obj) {
   switch ({}.toString.call(obj)) {
+    case '[object Object]':
+      return objectToFunction(obj);
     case '[object Function]':
       return obj;
     case '[object String]':
@@ -68,4 +70,29 @@ function stringToFunction(str) {
 
   // properties such as "name.first" or "age > 18"
   return new Function('_', 'return _.' + str);
+}
+
+/**
+ * Convert `object` to a function.
+ *
+ * @param {Object} object
+ * @return {Function}
+ * @api private
+ */
+
+function objectToFunction(obj) {
+  var match = {}
+  for (var key in obj) {
+    match[key] = typeof obj[key] === 'string'
+      ? defaultToFunction(obj[key])
+      : toFunction(obj[key])
+  }
+  return function(val){
+    if (typeof val !== 'object') return false;
+    for (var key in match) {
+      if (!(key in val)) return false;
+      if (!match[key](val[key])) return false;
+    }
+    return true;
+  }
 }

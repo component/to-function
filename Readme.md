@@ -14,6 +14,23 @@ var fn = toFunction('name.first');
 var user = { name: { first: 'Tobi' }};
 fn(user);
 // => "Tobi"
+
+// Matching object properties:
+var fn = toFunction({
+  name: 'Tobi',
+  age: function(age) {
+    return age > 2
+  }
+});
+
+// Note: matcher ignores additional object properties
+var luna = { name: 'Luna', age: 3 };
+var tobi = { name: 'Tobi', age: 2 };
+var tobi = { name: 'Tobi', age: 3 };
+
+fn(luna); // => false
+fn(tobi); // => true
+
 ```
 
 ## Converts
@@ -22,6 +39,7 @@ fn(user);
   - regexps to `re.test(val)` calls
   - functions to themselves
   - defaults to `===` equality
+  - objects that match object properties
 
 ## License
 
