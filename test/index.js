@@ -62,6 +62,7 @@ describe('toFunction(object)', function(){
     assert(false === fn({name: 'tobi'}));
     assert(true === fn({name: 'tobi', age: 3, type: 'ferret'}));
   })
+  
   it('should match regexps in sub-objects', function(){
     var fn = toFunction({
       name: /Mr\./,
