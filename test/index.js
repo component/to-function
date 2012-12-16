@@ -49,6 +49,71 @@ describe('toFunction(regexp)', function(){
   })
 })
 
+describe('toFunction(object)', function(){
+  it('should match object values', function(){
+    var fn = toFunction({
+      name: 'tobi',
+      age: /\d+/
+    });
+    assert(false === fn({}));
+    assert(false === fn({name: 'luna'}));
+    assert(false === fn('tobi'));
+    assert(false === fn({name: 'luna', age: 2}));
+    assert(false === fn({name: 'tobi'}));
+    assert(true === fn({name: 'tobi', age: 3, type: 'ferret'}));
+  })
+  it('should match regexps in sub-objects', function(){
+    var fn = toFunction({
+      name: /Mr\./,
+      age: function(age) {
+        return age > 2
+      },
+      address: {
+        street: /\d+ Mayne Street/,
+        town: 'Rhode Island'
+      }
+    });
+
+    // Doesn't match inner regex
+    assert(false === fn({
+      name: 'Mrs. Tobi',
+      age: 3,
+      address: {
+        street: 'Somewhere on Mayne Street',
+        town: 'Rhode Island'
+      }
+    }));
+
+    // Missing address.street
+    assert(false === fn({
+      name: 'Mr. Tobi',
+      age: 3,
+      address: {
+        town: 'Rhode Island'
+      }
+    }));
+
+    // age < 2
+    assert(false === fn({
+      name: 'Mr. Tobi',
+      age: 2,
+      address: {
+        street: '12 Mayne Street',
+        town: 'Rhode Island'
+      }
+    }));
+
+    assert(true === fn({
+      name: 'Mr. Tobi',
+      age: 3,
+      address: {
+        street: '12 Mayne Street',
+        town: 'Rhode Island'
+      }
+    }));
+  });
+});
+
 describe('toFunction(other)', function(){
   it('should default to === equality', function(){
     var fn = toFunction(null);
