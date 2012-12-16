@@ -81,19 +81,17 @@ function stringToFunction(str) {
  */
 
 function objectToFunction(obj) {
+  var match = {}
+  for (var key in obj) {
+    match[key] = typeof obj[key] === 'string'
+      ? defaultToFunction(obj[key])
+      : toFunction(obj[key])
+  }
   return function(val){
     if (typeof val !== 'object') return false;
-    for (var key in obj) {
+    for (var key in match) {
       if (!(key in val)) return false;
-      switch ({}.toString.call(obj[key])) {
-        case '[object Object]':
-        case '[object RegExp]':
-        case '[object Function]':
-          if (!toFunction(obj[key])(val[key])) return false;
-        break;
-        default:
-          if (obj[key] !== val[key]) return false;
-      }
+      if (!match[key](val[key])) return false;
     }
     return true;
   }
