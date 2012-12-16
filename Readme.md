@@ -6,6 +6,14 @@
 
     $ component install component/to-function
 
+## Converts
+
+  - functions to themselves
+  - strings to property access (`name`, `name.first`)
+  - expression strings (`> 20`, `age > 20`, `views.unique > 50`, `remove()`)
+  - regular expressions to test calls
+  - objects to nested filter
+
 ## Examples
 
 ```js

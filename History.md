@@ -1,4 +1,10 @@
 
+1.2.0 / 2012-12-16 
+==================
+
+  * add examples and docs
+  * add nested object support
+
 1.1.1 / 2012-11-20 
 ==================
 
