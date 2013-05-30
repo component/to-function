@@ -69,7 +69,10 @@ function stringToFunction(str) {
   if (/^ *\W+/.test(str)) return new Function('_', 'return _ ' + str);
 
   // properties such as "name.first" or "age > 18"
-  return new Function('_', 'return _.' + str);
+  // second case is for array access, e.g. arr.filter(_('Tobi'))
+  return new Function('item', 'return ({}.toString.call(item) === "[object Object]")' +
+    '? item.' + str +
+    ': item === "' + str + '"');
 }
 
 /**

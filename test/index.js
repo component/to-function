@@ -13,6 +13,12 @@ describe('toFunction(str)', function(){
     fn({ name: { first: 'Tobi' } }).should.equal('Tobi');
   })
 
+  it('should access array elements', function(){
+    var fn = toFunction('Tobi');
+    fn('Ferret').should.be.false;
+    fn('Tobi').should.be.true;
+  })
+
   it('should invoke getter-style functions', function(){
     var user = { attrs: { name: 'tj' }};
     user.name = function(){ return this.attrs.name };
