@@ -48,6 +48,11 @@ var users = [tobi, loki, jane];
 var user = users.filter(_(loki)).pop();
 console.log(user);
 // => { name: { first: 'Loki' }, age: 2 }
+
+// Works with arrays.
+var users2 = ['Tobi', 'Loki', 'Tobi', 'Jane'];
+console.log(users2.filter(_('Tobi'));
+// => ['Tobi', 'Tobi']
 ```
 
 ### Expressions
