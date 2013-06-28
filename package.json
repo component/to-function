@@ -7,11 +7,11 @@
     "utility"
   ],
   "dependencies": {
-    "better-assert": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "better-assert": "*"
   },
   "component": {
     "scripts": {
