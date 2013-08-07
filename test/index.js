@@ -1,6 +1,7 @@
 
 var toFunction = require('..')
-  , assert = require('better-assert');
+  , assert = require('better-assert')
+  , should = require('should');
 
 describe('toFunction(str)', function(){
   it('should access properties', function(){
@@ -24,6 +25,12 @@ describe('toFunction(str)', function(){
     var fn = toFunction('age > 18');
     assert(true === fn({ age: 20 }));
     assert(false === fn({ age: 18 }));
+  })
+
+  it('should support js expressions with logical operators', function(){
+    var fn = toFunction('age > 18 && age < 25');
+    assert(true === fn({ age: 20 }));
+    assert(false === fn({ age: 28 }));
   })
 
   it('should support js with immediate value', function(){

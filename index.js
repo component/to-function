@@ -1,5 +1,11 @@
 
 /**
+ * Module dependencies.
+ */
+
+var props = require('props-component');
+
+/**
  * Expose `toFunction()`.
  */
 
@@ -69,7 +75,7 @@ function stringToFunction(str) {
   if (/^ *\W+/.test(str)) return new Function('_', 'return _ ' + str);
 
   // properties such as "name.first" or "age > 18"
-  return new Function('_', 'return _.' + str);
+  return new Function('_', 'return ' + props(str, '_.'));
 }
 
 /**
