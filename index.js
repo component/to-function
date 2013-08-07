@@ -1,5 +1,11 @@
 
 /**
+ * Module dependencies.
+ */
+
+var props = require('props-component');
+
+/**
  * Expose `toFunction()`.
  */
 
@@ -68,22 +74,8 @@ function stringToFunction(str) {
   // immediate such as "> 20"
   if (/^ *\W+/.test(str)) return new Function('_', 'return _ ' + str);
 
-  // expressions with logical operators such as "age > 18 && age < 25"
-  // or "age == 18 || age == 22"
-  if (/[&]{2}|[|]{2}/.test(str)) {
-    return function(arr) {
-      var exp = str;
-      var chunks = exp.split(/[&]{2}|[|]{2}/);
-      for(var key in chunks) {
-        chunk = chunks[key].trim();
-        exp = exp.replace(chunk, 'arr.' + chunk);
-      }
-      return eval(exp);
-    }
-  }
-
   // properties such as "name.first" or "age > 18"
-  return new Function('_', 'return _.' + str);
+  return new Function('_', 'return ' + props(str, '_.'));
 }
 
 /**
