@@ -61,7 +61,7 @@ var users = [
   { name: { first: 'Jane' }, age: 6 }
 ];
 
-var oldPets = users.filter(_('age > 2'));
+var oldPets = users.filter(_('age > 2 && age < 10'));
 console.log(oldPets);
 // => [ { name: { first: 'Jane' }, age: 6 } ]
 ```
