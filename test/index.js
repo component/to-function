@@ -26,10 +26,34 @@ describe('toFunction(str)', function(){
     assert(false === fn({ age: 18 }));
   })
 
+  it('should support complex js expressions', function(){
+    var fn = toFunction('age > 18 && age < 35');
+    assert(true === fn({ age: 20 }));
+    assert(false === fn({ age: 18 }));
+  })
+
   it('should support js with immediate value', function(){
     var fn = toFunction('> 18');
     assert(true === fn(20));
     assert(false === fn(18));
+  })
+
+  it('should support js with getter-style functions', function(){
+    var user = { attrs: { age: 24 }};
+    user.age = function(){ return this.attrs.age };
+    var fn = toFunction('age > 25');
+    assert(false == fn(user));
+    var fn = toFunction('age > 20');
+    assert(true == fn(user));
+  })
+
+  it('should support complex js expressions with getter-style functions', function(){
+    var user = { attrs: { age: 24 }};
+    user.age = function(){ return this.attrs.age };
+    var fn = toFunction('age > 30 || age < 20');
+    assert(false == fn(user));
+    var fn = toFunction('age > 20 && age < 35');
+    assert(true == fn(user));
   })
 })
 

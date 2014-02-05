@@ -6,7 +6,9 @@
   "keywords": [
     "utility"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "props-component": "*"
+  },
   "devDependencies": {
     "mocha": "*",
     "should": "*",

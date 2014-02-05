@@ -1,3 +1,12 @@
+/**
+ * Module Dependencies
+ */
+
+try {
+  var expr = require('props');
+} catch(e) {
+  var expr = require('props-component');
+}
 
 /**
  * Expose `toFunction()`.
@@ -68,8 +77,8 @@ function stringToFunction(str) {
   // immediate such as "> 20"
   if (/^ *\W+/.test(str)) return new Function('_', 'return _ ' + str);
 
-  // properties such as "name.first" or "age > 18"
-  return new Function('_', 'return _.' + str);
+  // properties such as "name.first" or "age > 18" or "age > 18 && age < 36"
+  return new Function('_', 'return ' + get(str));
 }
 
 /**
@@ -95,4 +104,26 @@ function objectToFunction(obj) {
     }
     return true;
   }
+}
+
+/**
+ * Built the getter function. Supports getter style functions
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function get(str) {
+  var props = expr(str);
+  if (!props.length) return '_.' + str;
+
+  var val;
+  for(var i = 0, prop; prop = props[i]; i++) {
+    val = '_.' + prop;
+    val = "('function' == typeof " + val + " ? " + val + "() : " + val + ")";
+    str = str.replace(new RegExp(prop, 'g'), val);
+  }
+
+  return str;
 }
