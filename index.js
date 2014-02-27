@@ -2,11 +2,7 @@
  * Module Dependencies
  */
 
-try {
-  var expr = require('props');
-} catch(e) {
-  var expr = require('props-component');
-}
+var expr = require('props');
 
 /**
  * Expose `toFunction()`.
