@@ -1,4 +1,10 @@
 
+2.0.0 / 2014-02-27 
+==================
+
+  * cmp; bump version 2.0.0
+  * core: remove dual requiring dependency
+
 1.2.1 / 2014-02-05
 ==================
 
