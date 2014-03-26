@@ -7,7 +7,7 @@
     "utility"
   ],
   "dependencies": {
-    "props-component": "*"
+    "component-props": "*"
   },
   "devDependencies": {
     "mocha": "*",
