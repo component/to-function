@@ -13,6 +13,21 @@ describe('toFunction(str)', function(){
     fn({ name: { first: 'Tobi' } }).should.equal('Tobi');
   })
 
+  it('should access nested properties with the same name', function(){
+    var fn = toFunction('name.name');
+    fn({ name: { name: 'Tobi' } }).should.equal('Tobi');
+  })
+  
+  it('should access deeply nested properties with the same name', function(){
+    var fn = toFunction('name.name.name');
+    fn({ name: { name: { name: 'Tobi' } } }).should.equal('Tobi');
+  })
+
+  it('should access nested properties with the same name with levels in between', function(){
+    var fn = toFunction('name.foo.name');
+    fn({ name: { foo: { name: 'Tobi' } } }).should.equal('Tobi');
+  })
+
   it('should invoke getter-style functions', function(){
     var user = { attrs: { name: 'tj' }};
     user.name = function(){ return this.attrs.name };
@@ -55,6 +70,7 @@ describe('toFunction(str)', function(){
     var fn = toFunction('age > 20 && age < 35');
     assert(true == fn(user));
   })
+
 })
 
 describe('toFunction(fn)', function(){

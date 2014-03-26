@@ -118,7 +118,13 @@ function get(str) {
   for(var i = 0, prop; prop = props[i]; i++) {
     val = '_.' + prop;
     val = "('function' == typeof " + val + " ? " + val + "() : " + val + ")";
-    str = str.replace(new RegExp(prop, 'g'), val);
+
+    /* mimic negative lookbehind to avoid problems with nested properties
+     * see: http://blog.stevenlevithan.com/archives/mimic-lookbehind-javascript
+     */
+    str = str.replace(new RegExp('(\\.)?' + prop, 'g'), function($0, $1) {
+      return $1 ? $0 : val;
+    });
   }
 
   return str;
