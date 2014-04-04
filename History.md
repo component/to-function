@@ -1,3 +1,9 @@
+2.0.3 / 2014-04-04
+==================
+
+ * use remove-try-require to correct browserify support.
+ * add package.json test script.
+
 2.0.2 / 2014-04-02
 ==================
 
