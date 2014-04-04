@@ -1,3 +1,4 @@
+
 var toFunction = require('..')
   , assert = require('better-assert');
 
