@@ -1,4 +1,3 @@
-
 var toFunction = require('..')
   , assert = require('better-assert');
 
@@ -70,7 +69,6 @@ describe('toFunction(str)', function(){
     var fn = toFunction('age > 20 && age < 35');
     assert(true == fn(user));
   })
-
 })
 
 describe('toFunction(fn)', function(){
