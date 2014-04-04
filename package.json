@@ -9,6 +9,9 @@
   "dependencies": {
     "component-props": "*"
   },
+  "scripts": {
+    "test": "make test"
+  },
   "devDependencies": {
     "better-assert": "*",
     "mocha": "*",
