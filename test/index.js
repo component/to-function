@@ -17,7 +17,7 @@ describe('toFunction(str)', function(){
     var fn = toFunction('name.name');
     fn({ name: { name: 'Tobi' } }).should.equal('Tobi');
   })
-  
+
   it('should access deeply nested properties with the same name', function(){
     var fn = toFunction('name.name.name');
     fn({ name: { name: { name: 'Tobi' } } }).should.equal('Tobi');
