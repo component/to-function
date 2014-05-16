@@ -1,3 +1,12 @@
+
+2.0.4 / 2014-05-16
+==================
+
+  * index: fix lint
+  * add .jshintrc file
+  * test: whitespace
+  * index: properly handle nested properties (#11)
+
 2.0.3 / 2014-04-04
 ==================
 
