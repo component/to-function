@@ -1,4 +1,9 @@
 
+2.0.5 / 2014-05-27
+==================
+
+  * package: "remove-try-require" should be a dependency
+
 2.0.4 / 2014-05-16
 ==================
 
