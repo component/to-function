@@ -7,8 +7,7 @@
     "utility"
   ],
   "dependencies": {
-    "component-props": "*",
-    "remove-try-require": "0.0.0"
+    "component-props": "*"
   },
   "scripts": {
     "test": "make test"
