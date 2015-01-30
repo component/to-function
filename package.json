@@ -17,10 +17,8 @@
     "mocha": "*",
     "should": "*"
   },
-  "browserify": {
-    "transform": [
-      "remove-try-require"
-    ]
+  "browser": {
+    "props": "component-props"
   },
   "component": {
     "scripts": {
